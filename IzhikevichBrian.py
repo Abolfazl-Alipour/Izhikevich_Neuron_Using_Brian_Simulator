@@ -19,11 +19,12 @@ noiseAmp=3 #how large you want your noise to be
 
 eqs = '''dvm/dt = (0.04/ms/mV)*vm**2+(5/ms)*vm+140*mV/ms-w + I +  (noiseAmp*xi*ms**-.5)*mV: volt
          dw/dt = a*(b*vm-w) : volt/second
-         I=20*volt/second : volt/second'''
+         I : volt/second'''
 G = NeuronGroup(N, eqs,
                     threshold='vm > 30*mV',
                     reset='vm = c; w=w+d',method='milstein')
 G.vm='rand()*vRandInit*mV'
+G.I=20*volt/second
 
 
 spikemon = SpikeMonitor(G)
